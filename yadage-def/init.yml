@@ -1,4 +1,4 @@
 slhafile: input.slha
-events: 1000
+events: 100
 stop_mass: 750
 analysis: atlas_conf_2013_047

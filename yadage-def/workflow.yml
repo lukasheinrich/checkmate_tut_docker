@@ -1,0 +1,41 @@
+stages:
+  - name: herwig
+    dependencies: ['init']
+    scheduler:
+      scheduler_type: singlestep-stage
+      step: {$ref: 'steps.yml#/herwig'}
+      parameters:
+        slhafile: {stages: init, output: slhafile, unwrap: true}
+        events: {stages: init, output: events, unwrap: true}
+        seed: 1234
+        hepmcfile: '{workdir}/out.hepmc'
+        herwigruncard: '{workdir}/runcard.dat'
+  - name: compute_xsec
+    dependencies: ['init']
+    scheduler:
+      scheduler_type: singlestep-stage
+      step: {$ref: 'steps.yml#/compute_xsec'}
+      parameters:
+        stop_mass: {stages: init, output: stop_mass, unwrap: true}
+        xsecfile: '{workdir}/xsec.json'
+  - name: checkmate
+    dependencies: ['compute_xsec']
+    scheduler:
+      scheduler_type: singlestep-stage
+      step: {$ref: 'steps.yml#/checkmate'}
+      parameters:
+        seed: 9876
+        outputdir: '{workdir}/checkmaterun'
+        xsecfile: {stages: compute_xsec, output: xsecfile, unwrap: true}
+        hepmcfile: {stages: herwig, output: hepmcfile, unwrap: true}
+        analysis: {stages: init, output: analysis, unwrap: true}
+        runcardfile: '{workdir}/checkmate.dat'
+  - name: format_results
+    dependencies: ['checkmate']
+    scheduler:
+      scheduler_type: singlestep-stage
+      step: {$ref: 'steps.yml#/format_results'}
+      parameters:
+        outputdir: {stages: checkmate, output: outputdir, unwrap: true}
+        analysis: {stages: init, output: analysis, unwrap: true}
+        limitresultfile: '{workdir}/limits.json'

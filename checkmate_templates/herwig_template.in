@@ -17,7 +17,7 @@ insert HPConstructor:Outgoing 1 /Herwig/Particles/~t_1bar
 
 cd /Herwig/Generators
 insert LHCGenerator:AnalysisHandlers 0 /Herwig/Analysis/HepMCFile
-set /Herwig/Analysis/HepMCFile:PrintEvent 10000
+set /Herwig/Analysis/HepMCFile:PrintEvent {__events__}
 set /Herwig/Analysis/HepMCFile:Format GenEvent
 set LHCGenerator:NumberOfEvents {__events__}
 set LHCGenerator:PrintEvent 1

@@ -14,10 +14,10 @@ def cli():
 @click.argument('template')
 @click.argument('stop_mass')
 @click.argument('neutralino_mass')
-@click.argument('outputSLHA')
-def prepare_slha(template,stop_mass,neutralino_mass,outputSLHA):
+@click.argument('outputfile')
+def prepare_slha(template,stop_mass,neutralino_mass,outputfile):
     with open(template) as f:
-        with open(outputSLHA,'w') as filled:
+        with open(outputfile,'w') as filled:
             filled.write(
                 f.read().format(
                     __stop_mass__ = stop_mass,

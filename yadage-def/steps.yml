@@ -1,7 +1,7 @@
 prepare_slha:
   process:
     process_type: 'string-interpolated-cmd'
-    cmd: 'utilcli.py {template} {stop_mass} {neutralino_mass} {outputSLHA}'
+    cmd: 'utilcli.py prepare_slha {template} {stop_mass} {neutralino_mass} {outputSLHA}'
   publisher:
     publisher_type: 'frompar-pub'
     outputmap:

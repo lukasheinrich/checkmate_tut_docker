@@ -1,0 +1,15 @@
+[Mandatory Parameters]
+Name: {__name__}
+Analyses: {__analysis__}
+
+[Optional Parameters]
+RandomSeed: {__seed__}
+OutputDirectory: {__outputdir__}
+SkipParamCheck: True
+FullCL: True
+Likelihood: True
+
+[stops]
+XSect: {__xsec_value__} {__xsec_unit__}
+XSectErr: 0 {__xsec_unit__}
+Events: {__inputhepmc__}

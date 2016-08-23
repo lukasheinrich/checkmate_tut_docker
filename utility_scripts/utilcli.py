@@ -11,6 +11,21 @@ def cli():
     pass
 
 @cli.command()
+@click.argument('template')
+@click.argument('stop_mass')
+@click.argument('neutralino_mass')
+@click.argument('outputSLHA')
+def prepare_slha(template,stop_mass,neutralino_mass,outputSLHA):
+    with open(template) as f:
+        with open(outputSLHA,'w') as filled:
+            filled.write(
+                f.read().format(
+                    __stop_mass__ = stop_mass,
+                    __neutralino_mass__   = neutralino_mass,
+                )
+            )
+
+@cli.command()
 @click.option('-e','--events', default = 10000)
 @click.option('-s','--seed', default = 123456)
 @click.option('-o','--output', default = 'output.hepmc')

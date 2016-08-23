@@ -1,3 +1,15 @@
+prepare_slha:
+  process:
+    process_type: 'string-interpolated-cmd'
+    cmd: 'utilcli.py {template} {stop_mass} {neutralino_mass} {outputSLHA}'
+  publisher:
+    publisher_type: 'frompar-pub'
+    outputmap:
+      outputSLHA: outputSLHA
+  environment:
+    environment_type: 'docker-encapsulated'
+    image: lukasheinrich/checkmate_w_util
+
 herwig:
   process:
     process_type: 'string-interpolated-cmd'
